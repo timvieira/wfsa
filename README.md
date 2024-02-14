@@ -1,9 +1,7 @@
-Implementation of weighted finite state automata over fields.
+Implementation of field-weighted finite-state automata.
 
-This implementation of equivalence and minimization follows Kiefer (2020) very closely
-
+This implementation of equivalence and minimization closely follows [Kiefer (2020)](https://arxiv.org/abs/2009.01217).
 
 References
 
- - Stefan Kiefer (2020) "Notes on Equivalence and Minimization of Weighted Automata"
-   arXiv:2009.01217v1 [cs.FL]
+ - Stefan Kiefer (2020) [Notes on Equivalence and Minimization of Weighted Automata](https://arxiv.org/abs/2009.01217)
