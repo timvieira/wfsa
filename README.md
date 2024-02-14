@@ -1,4 +1,4 @@
-Implementation of field-weighted finite-state automata.
+# (Field) Weighted Finite-State Automata
 
 This implementation of equivalence and minimization closely follows [Kiefer (2020)](https://arxiv.org/abs/2009.01217).
 
