@@ -446,7 +446,7 @@ class Simple:
         #       n          n'     (n' x n)
         #
         # There are n >= n' constraints, but they aren't linearly independent so
-        # the system has a unique solution.
+        # the system does not have a unique solution. We use the least squares solution.
         #
         #    old_start @ F.T = new_start @ F @ F.T
         #                                 (n' x n) (n x n')
