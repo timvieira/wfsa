@@ -20,8 +20,6 @@ from graphviz import Digraph
 from numpy import linalg
 #from scipy import linalg
 
-#cached_property = property
-
 
 EPSILON = ε = "ε"
 

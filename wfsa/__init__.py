@@ -1,1 +1,1 @@
-from wfsa.wfsa import WFSA, one, zero
+from wfsa.wfsa import WFSA, one, zero, EPSILON
