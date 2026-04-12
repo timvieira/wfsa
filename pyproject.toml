@@ -28,4 +28,3 @@ Repository = "https://github.com/timvieira/wfsa"
 
 [tool.pytest.ini_options]
 testpaths = ["test"]
-python_files = ["test_*.py", "tests.py"]
