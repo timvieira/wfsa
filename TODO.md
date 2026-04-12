@@ -2,20 +2,20 @@
 
 ## Packaging & Project Setup
 
-- [ ] Migrate `setup.py` to `pyproject.toml` (PEP 621)
-- [ ] Fix `project_url` (should be `project_urls` dict) and add `author_email`
-- [ ] Add missing dependencies: `semirings`, `frozendict`, `leftcorner` (needed by semiring module and tests)
-- [ ] Don't list `pytest` in `install_requires` — move to `[project.optional-dependencies]` or `[tool.pytest]`
+- [x] Migrate `setup.py` to `pyproject.toml` (PEP 621)
+- [x] Fix `project_url` (should be `project_urls` dict) and add `author_email`
+- [x] Add missing dependencies: `semirings`, `frozendict`, `leftcorner` (needed by semiring module and tests)
+- [x] Don't list `pytest` in `install_requires` — move to `[project.optional-dependencies]` or `[tool.pytest]`
 - [ ] Pin the `arsenal` git dependency to a tag/commit for reproducibility
 - [ ] Add a `LICENSE` file
 - [ ] Add `py.typed` marker and basic type annotations on public API
-- [ ] Clean up stale `wfsa.egg-info/` and `__pycache__` (add to `.gitignore`)
+- [x] Clean up stale `wfsa.egg-info/` and `__pycache__` (add to `.gitignore`)
 
 ## CI
 
-- [ ] Add GitHub Actions workflow: run tests on push (`pytest test/`)
+- [x] Add GitHub Actions workflow: run tests on push (`pytest test/`)
 - [ ] Add a linting step (ruff or flake8)
-- [ ] Add a matrix for Python 3.10+ versions
+- [x] Add a matrix for Python 3.10+ versions
 
 ## Mathematical Correctness & Robustness
 

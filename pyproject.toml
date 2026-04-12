@@ -1,0 +1,31 @@
+[project]
+name = "wfsa"
+version = "0.1"
+description = "Implementation of field-weighted finite-state automata."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Tim Vieira" },
+]
+
+dependencies = [
+    "numpy",
+    "graphviz",
+    "semirings",
+    "frozendict",
+    "arsenal @ git+https://github.com/timvieira/arsenal",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "leftcorner",
+]
+
+[project.urls]
+Homepage = "https://github.com/timvieira/wfsa"
+Repository = "https://github.com/timvieira/wfsa"
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
+python_files = ["test_*.py", "tests.py"]
