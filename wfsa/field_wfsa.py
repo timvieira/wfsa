@@ -12,7 +12,7 @@ References
 
 """
 import numpy as np
-from collections import defaultdict, Counter, deque
+from collections import deque
 from functools import cached_property
 
 from numpy import linalg

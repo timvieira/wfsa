@@ -1,7 +1,6 @@
 """
 Implementation of semiring-weighted finite state automata.
 """
-from collections import defaultdict
 from functools import cached_property
 from frozendict import frozendict
 

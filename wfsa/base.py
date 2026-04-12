@@ -175,7 +175,7 @@ class WFSA:
     @cached_property
     def K(self):
         W = self.R.chart()
-        for i, a, j, w in self.arcs():
+        for i, _, j, w in self.arcs():
             W[i, j] += w
         return _lehmann(self.R, self.states, W)
 
@@ -299,10 +299,10 @@ class WFSA:
     def from_strings(cls, Xs, R):
         m = cls(R)
         for xs in Xs:
-            m.add_I(xs[:0])
+            m.add_I(xs[:0], R.one)
             for i in range(len(xs)):
                 m.add_arc(xs[:i], xs[i], xs[:i+1], R.one)
-            m.add_F(xs)
+            m.add_F(xs, R.one)
         return m
 
     def total_weight(self):
