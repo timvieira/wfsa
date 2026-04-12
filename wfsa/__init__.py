@@ -1,1 +1,5 @@
-from wfsa.wfsa import WFSA, one, zero, EPSILON
+#import wfsa.base
+from wfsa.field_wfsa import WFSA, EPSILON
+
+one = WFSA.one
+zero = WFSA.zero

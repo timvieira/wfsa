@@ -1,9 +1,12 @@
 import numpy as np
 from arsenal import colors
-from wfsa import WFSA, one, zero
+from wfsa.field_wfsa import WFSA
 
 
 def test_min():
+
+    one = WFSA.one
+    zero = WFSA.zero
 
     a = WFSA.lift('a', 1)
     b = WFSA.lift('b', 1)
@@ -67,6 +70,8 @@ def test_equivalence():
     a = WFSA.lift('a', 1)
     b = WFSA.lift('b', 1)
     c = WFSA.lift('c', 1)
+
+    one = WFSA.one
 
     #___________________________________________________________________________
     #
