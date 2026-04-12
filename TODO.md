@@ -12,7 +12,7 @@
 ## CI
 
 - [x] Add GitHub Actions workflow: run tests on push (`pytest test/`)
-- [ ] Add a linting step (ruff or flake8)
+- [x] Add a linting step (ruff)
 - [x] Add a matrix for Python 3.10+ versions
 
 ## Mathematical Correctness & Robustness
@@ -22,7 +22,7 @@
 - [ ] **`approx_equal` tolerance**: Hardcoded via `np.allclose` defaults (`atol=1e-8`). Consider making tolerance configurable, especially for ill-conditioned automata or long strings where error accumulates.
 - [ ] **`Simple.__hash__` returns constant 0**: Every `Simple` instance hashes identically, making any dict/set of them O(n). The commented-out randomized hash (based on [arXiv:1302.2818](https://arxiv.org/abs/1302.2818)) is a good direction — worth finishing.
 - [ ] **`counterexample()` basis test is inverted**: Line 231 checks `not approx_equal(u - q, u)` — this adds to the basis when the projection *changed* `u`, but the variable name `q` shadows the loop variable in `proj()`. More importantly, the check should arguably be on the residual norm, not on whether `u` changed (a vector can change but still be nearly dependent). Consider `np.linalg.norm(u - q) > tol` instead.
-- [ ] **`from_strings` missing initial/final weights**: `base.py:302-305` calls `m.add_I(xs[:0])` and `m.add_F(xs)` with no weight argument — these calls are missing the weight `w` (compare with `from_string` which passes `R.one`).
+- [x] **`from_strings` missing initial/final weights**: `base.py:302-305` calls `m.add_I(xs[:0])` and `m.add_F(xs)` with no weight argument — these calls are missing the weight `w` (compare with `from_string` which passes `R.one`).
 - [ ] **`star()` convergence for semirings**: `_lehmann` calls `R.star()` which computes `(1-x)^{-1}` — valid for reals with `|x|<1`, but no convergence check. Document the precondition or add a guard.
 - [ ] **Weight pushing assumes invertibility**: `push` (`field_wfsa.py:130-132`, `semiring_wfsa.py:86-88`) inverts backward weights with `V[i]**(-1)`. The zero check guards the outer loop but not individual arc weights mixing zero/nonzero. Document that pushing requires the weight semiring to be a group (or at minimum a division ring).
 
@@ -45,11 +45,11 @@
 - [ ] **`reverse` ∘ `reverse` = identity** (up to renaming)
 - [ ] **`star`, `kleene_plus` correctness**: test against brute-force enumeration for small alphabets
 - [ ] **Semiring determinization non-termination**: add a timeout or max-states guard in tests so a broken `determinize` doesn't hang CI
-- [ ] **`from_strings` is broken** (see correctness section) — add a test that catches it
+- [ ] **`from_strings` test**: add a test for `from_strings` (was broken, now fixed)
 
 ## Code Quality
 
-- [ ] Remove unused imports: `defaultdict` and `Counter` in `field_wfsa.py:15`
+- [x] Remove unused imports: `defaultdict` and `Counter` in `field_wfsa.py:15`
 - [ ] Remove dead commented-out code (e.g., the `__call__` override, `epsremove` override, `_hash` block in `Simple`)
 - [ ] `base.py:109` raises `NotImplementedError` for `arcs(a=..., i=None)` — either implement or document why it's excluded
 - [ ] Duplicated `push` implementation in `field_wfsa.py` and `semiring_wfsa.py` — factor into `base.py` (the code is identical)
