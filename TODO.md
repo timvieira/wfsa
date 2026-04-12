@@ -6,9 +6,7 @@
 - [x] Fix `project_url` (should be `project_urls` dict) and add `author_email`
 - [x] Add missing dependencies: `semirings`, `frozendict`, `leftcorner` (needed by semiring module and tests)
 - [x] Don't list `pytest` in `install_requires` — move to `[project.optional-dependencies]` or `[tool.pytest]`
-- [ ] Pin the `arsenal` git dependency to a tag/commit for reproducibility
-- [ ] Add a `LICENSE` file
-- [ ] Add `py.typed` marker and basic type annotations on public API
+- [x] Add a `LICENSE` file
 - [x] Clean up stale `wfsa.egg-info/` and `__pycache__` (add to `.gitignore`)
 
 ## CI
