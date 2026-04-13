@@ -1,3 +1,10 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["wfsa*"]
+
 [project]
 name = "wfsa"
 version = "0.1"
