@@ -119,19 +119,6 @@ class WFSA(wfsa.base.WFSA):
         m.add_F(1, R.one)
         return m
 
-    @cached_property
-    def push(self):
-        "Weight pushing algorithm (Mohri, 2001)."
-        V = self.backward()
-        new = self.spawn()
-        for i in self.states:
-            if V[i] == self.R.zero: continue
-            new.add_I(i, self.start[i] * V[i])
-            new.add_F(i, V[i]**(-1) * self.stop[i])
-            for a, j, w in self.arcs(i):
-                new.add_arc(i, a, j, V[i]**(-1) * w * V[j])
-        return new
-
 #    @property
 #    def zero(self):
 #        return self.__class__(self.R)

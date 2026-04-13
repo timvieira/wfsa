@@ -106,7 +106,10 @@ class WFSA:
                             if w != self.R.zero:
                                 yield i, a, j, w
             else:
-                raise NotImplementedError
+                for i in self.delta:
+                    for j, w in self.delta[i].get(a, {}).items():
+                        if w != self.R.zero:
+                            yield i, j, w
 
     def rename(self, f):
         "Note: If `f` is not bijective, states may merge."
@@ -229,6 +232,19 @@ class WFSA:
     @property
     def one(self):
         return self.__class__.lift(EPSILON, self.R.one)
+
+    @cached_property
+    def push(self):
+        "Weight pushing algorithm (Mohri, 2001)."
+        V = self.backward()
+        new = self.spawn()
+        for i in self.states:
+            if V[i] == self.R.zero: continue
+            new.add_I(i, self.start[i] * V[i])
+            new.add_F(i, V[i]**(-1) * self.stop[i])
+            for a, j, w in self.arcs(i):
+                new.add_arc(i, a, j, V[i]**(-1) * w * V[j])
+        return new
 
     def star(self):
         return self.one + self.kleene_plus()

@@ -33,7 +33,22 @@
 
 ## Code Quality
 
-- [ ] Remove dead commented-out code (e.g., the `__call__` override, `epsremove` override, `_hash` block in `Simple`)
-- [ ] `base.py` raises `NotImplementedError` for `arcs(a=..., i=None)` — either implement or document why it's excluded
-- [ ] Duplicated `push` implementation in `field_wfsa.py` and `semiring_wfsa.py` — factor into `base.py` (the code is identical)
-- [ ] `WFSA.zero` and `WFSA.one` are set as class attributes by assignment after class definition, overriding the `@property` in `base.py`. This is fragile — use `classproperty` or a `__init_subclass__` hook.
+- [x] `base.py` raises `NotImplementedError` for `arcs(a=..., i=None)` — implemented
+- [x] Duplicated `push` implementation in `field_wfsa.py` and `semiring_wfsa.py` — factored into `base.py`
+- [ ] `WFSA.zero` and `WFSA.one` are set as class attributes by assignment after class definition (`field_wfsa.py:143-144`), overriding the `@property` in `base.py`. This means `instance.zero` returns the Float-valued class constant instead of respecting `instance.R`. Options:
+
+  1. **Module-level constants**: Remove class assignment, export `zero`/`one` from `wfsa/__init__.py` directly. Base `@property` handles instance access.
+     - Pro: Simple, no new abstractions.
+     - Con: Changes public API (`WFSA.zero` → `wfsa.zero`). Tests and `__init__.py` need updating.
+
+  2. **Custom descriptor**: A `__get__` that returns a default for class access (`WFSA.zero`) and delegates to `self.R` for instance access (`instance.zero`).
+     - Pro: Both `WFSA.zero` and `instance.zero` work correctly.
+     - Con: Adds a new descriptor class for two attributes.
+
+  3. **`__init_subclass__` hook**: Base class sets `cls.zero = cls(R=...)` on each subclass.
+     - Pro: Automatic for new subclasses.
+     - Con: Requires each subclass to declare a default semiring. Still overrides the property (same bug for non-default R instances).
+
+  4. **Leave as-is, document the limitation**: `WFSA.zero`/`WFSA.one` are Float-specific conveniences; `self.zero`/`self.one` from `base.py` only work if no subclass overrides them.
+     - Pro: No code change.
+     - Con: `self.one` in `base.py:star()` silently returns the wrong semiring if `self.R != Float`.

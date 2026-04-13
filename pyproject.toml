@@ -34,10 +34,6 @@ test = [
 Homepage = "https://github.com/timvieira/wfsa"
 Repository = "https://github.com/timvieira/wfsa"
 
-[tool.blog]
-static = ["figures"]
-preprocess = []
-
 [tool.ruff]
 line-length = 90
 indent-width = 4
